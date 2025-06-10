@@ -1,5 +1,6 @@
 import pytest
 
+from data import TD
 from praktikum.ingredient import Ingredient
 from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
 
@@ -7,8 +8,8 @@ from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FI
 class TestIngredient:
 
     @pytest.mark.parametrize("ingredient_type, name, price", [
-    (INGREDIENT_TYPE_SAUCE,"Плазменный нектар", 349),  # ингредиент соус
-    (INGREDIENT_TYPE_FILLING, "Антивещество", 567)  # ингредиент начинка
+    (INGREDIENT_TYPE_SAUCE, TD.SAUCE_NAME, TD.SAUCE_PRICE),  # ингредиент соус
+    (INGREDIENT_TYPE_FILLING, TD.FILLING_NAME, TD.FILLING_PRICE)  # ингредиент начинка
         ])
 
     #Тест на успешное создание ингредиента

@@ -1,6 +1,10 @@
 from unittest.mock import Mock
 
+from data import TD
+from praktikum.bun import Bun
 from praktikum.burger import Burger
+from praktikum.ingredient import Ingredient
+from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
 
 
 class TestBurger:
@@ -13,23 +17,27 @@ class TestBurger:
 
 
     # Тест проверяет корректность установки булочки в бургер и сохраняет её
-    def test_set_buns(self, bun):
+    def test_set_buns(self):
         burger = Burger()
+        bun = Bun(TD.BUN_NAME, TD.BUN_PRICE)
         burger.set_buns(bun)
         assert burger.bun == bun
 
 
    # Тест проверяет успешное добавление ингредиента - соус в бургер
-    def test_add_ingredient(self, ingredient_sauce):
+    def test_add_ingredient(self):
         burger = Burger()
-        burger.add_ingredient(ingredient_sauce)
+        ingredient = Ingredient(INGREDIENT_TYPE_SAUCE, TD.SAUCE_NAME, TD.SAUCE_PRICE)
+        burger.add_ingredient(ingredient)
         assert len(burger.ingredients) == 1
-        assert burger.ingredients[0] == ingredient_sauce
+        assert burger.ingredients[0] == ingredient
 
 
     # Тест проверяет успешное удаление ингредиента из бургера
-    def test_remove_ingredient(self, ingredient_sauce, ingredient_filling):
+    def test_remove_ingredient(self):
         burger = Burger()
+        ingredient_sauce = Ingredient(INGREDIENT_TYPE_SAUCE, TD.SAUCE_NAME, TD.SAUCE_PRICE)
+        ingredient_filling = Ingredient(INGREDIENT_TYPE_FILLING, TD.FILLING_NAME, TD.FILLING_PRICE)
         burger.add_ingredient(ingredient_sauce)
         burger.add_ingredient(ingredient_filling)
         burger.remove_ingredient(0)
@@ -38,8 +46,10 @@ class TestBurger:
 
 
     # Тест проверяет успешное перемещение ингредиентов (меняется индекс ингредиента)
-    def test_move_ingredient(self, ingredient_sauce, ingredient_filling):
+    def test_move_ingredient(self):
         burger = Burger()
+        ingredient_sauce = Ingredient(INGREDIENT_TYPE_SAUCE, TD.SAUCE_NAME, TD.SAUCE_PRICE)
+        ingredient_filling = Ingredient(INGREDIENT_TYPE_FILLING, TD.FILLING_NAME, TD.FILLING_PRICE)
         burger.add_ingredient(ingredient_sauce)
         burger.add_ingredient(ingredient_filling)
         burger.move_ingredient(0, 1)
@@ -78,8 +88,11 @@ class TestBurger:
 
 
     # Тест проверяет формирование чека с правильным форматированием
-    def test_get_receipt(self, bun, ingredient_sauce, ingredient_filling):
+    def test_get_receipt(self):
         burger = Burger()
+        bun = Bun(TD.BUN_NAME, TD.BUN_PRICE)
+        ingredient_sauce = Ingredient(INGREDIENT_TYPE_SAUCE, TD.SAUCE_NAME, TD.SAUCE_PRICE)
+        ingredient_filling = Ingredient(INGREDIENT_TYPE_FILLING, TD.FILLING_NAME, TD.FILLING_PRICE)
         burger.set_buns(bun)
         burger.add_ingredient(ingredient_sauce)
         burger.add_ingredient(ingredient_filling)
@@ -121,15 +134,17 @@ class TestBurger:
 
 
     # Тест проверяет стоимость бургера без ингредиентов
-    def test_empty_burger_price(self, bun):
+    def test_empty_burger_price(self):
         burger = Burger()
+        bun = Bun(TD.BUN_NAME, TD.BUN_PRICE)
         burger.set_buns(bun)
         assert burger.get_price() == bun.get_price() * 2
 
 
     # Тест проверяет чек для бургера без ингредиентов
-    def test_empty_burger_receipt(self, bun):
+    def test_empty_burger_receipt(self):
         burger = Burger()
+        bun = Bun(TD.BUN_NAME, TD.BUN_PRICE)
         burger.set_buns(bun)
         expected_receipt = (
             f'(==== {bun.get_name()} ====)\n'
