@@ -7,12 +7,6 @@ from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FI
 from praktikum.database import Database
 
 
-# метод создает и возвращает новый экземпляр класса Burger
-@pytest.fixture
-def burger():
-    return Burger()
-
-
 # метод создает и возвращает новый экземпляр класса Bun
 @pytest.fixture
 def bun():
