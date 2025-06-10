@@ -9,7 +9,8 @@ from praktikum.database import Database
 class TestDatabase:
 
     # Проверка инициализации базы данных
-    def test_initialization(self, database):
+    def test_initialization(self):
+        database = Database()
         assert len(database.buns) == 3
         assert len(database.ingredients) == 6
         assert isinstance(database.buns[0], Bun)
@@ -27,7 +28,8 @@ class TestDatabase:
         assert mock_ingredient.call_count == 6
 
     # Проверка списка доступных булок
-    def test_available_buns(self, database):
+    def test_available_buns(self):
+        database = Database()
         buns = database.available_buns()
         assert len(buns) == 3
         assert buns[0].get_name() == "black bun"
@@ -53,7 +55,8 @@ class TestDatabase:
 
 
     # Проверка списка доступных ингредиентов
-    def test_available_ingredients(self, database):
+    def test_available_ingredients(self):
+        database = Database()
         ingredients = database.available_ingredients()
         assert len(ingredients) == 6
 

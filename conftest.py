@@ -23,9 +23,3 @@ def ingredient_sauce():
 @pytest.fixture
 def ingredient_filling():
     return Ingredient(INGREDIENT_TYPE_FILLING, "Начинка - антиматерия", 560)
-
-
-# метод создает и возвращает новый экземпляр класса Database
-@pytest.fixture
-def database():
-    return Database()
